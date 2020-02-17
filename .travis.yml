@@ -7,3 +7,16 @@ before_install:
 
 script:
     - docker run -e CI=true coreyjgriff/docker-ci npm run test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: "docker-ci"
+    env: "DockerCi-env"
+    bucket_name: "elasticbeanstalk-us-east-1-304395450946"
+    bucket_path: "docker-ci"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
