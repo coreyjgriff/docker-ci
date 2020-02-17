@@ -1,0 +1,9 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t coreyjgriff/docker-ci -f Dockerfile.dev .
+
+script:
+    - docker run -e CI=true coreyjgriff/docker-ci npm run test
